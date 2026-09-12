@@ -84,7 +84,12 @@ except Exception:
 
 
 # Load current champion from MLflow Registry
-champion_model_uri = f"models:/{registered_model_name}@champion"
+champion_info = client.get_model_version_by_alias(
+    registered_model_name,
+    "champion"
+)
+
+champion_model_uri = f"runs:/{champion_info.run_id}/model"
 champion_model = mlflow.sklearn.load_model(champion_model_uri)
 
 # Save standalone champion artifact
