@@ -43,4 +43,4 @@ jobs:
 #         aws ecs update-service \
 #           --cluster default \
 #           --service streamlit-mlops-app-a5f9 \
-#            --force-new-deploymentg
+#            --force-new-deployment
