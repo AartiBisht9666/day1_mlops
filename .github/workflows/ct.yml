@@ -2,15 +2,16 @@ name: CT Pipeline
 
 on:
   push:
+    branches: [main]
     paths:
       - 'data/**'
       - 'src/train.py'
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   retrain:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
       actions: write
@@ -38,7 +39,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git add mlflow.db mlruns/
+
           if git diff --staged --quiet; then
             echo "No updates to MLflow tracking."
           else
